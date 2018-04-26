@@ -16,13 +16,25 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
+import Vue from 'vue';
 import header from './components/header/header';
+import VueResource from 'vue-resource';
+
+Vue.use(VueResource);
+
 export default {
   data() {
     return {
       seller: {}
     };
+  },
+  created() {
+    this.$http.get('goods').then(response => {
+      response = response.json();
+      if (response.errno === 0) {
+      }
+    });
   },
   components: {
     'v-header': header
