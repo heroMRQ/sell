@@ -53,10 +53,22 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     },
     /* datura_lj 增加express 20171126 */
     before(app) {
-      app.get('goods', (req, res) => {
+      app.get('/api/goods', (req, res) => {
         res.json({
           errno: 0,
           data: goods
+        })
+      });
+      app.get('/api/seller', (req, res) => {
+        res.json({
+          errno: 0,
+          data: seller
+        })
+      });
+      app.get('/api/rating', (req, res) => {
+        res.json({
+          errno: 0,
+          data: rating
         })
       })
     }
