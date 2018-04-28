@@ -13,12 +13,23 @@
            {{seller.description}}/{{seller.deliveryTime}}分钟送达
          </div>
          <div v-if="seller.supports" class="support">
-           <span class="icon"></span>
+           <span class="icon" :class="sellClass[seller.supports[0].type]"></span>
            <span class="text">{{seller.supports[0].description}}</span>
          </div>
        </div>
+       <div v-if="seller.supports" class="support-content">
+         <span class="court">{{seller.supports.length}}</span>
+         <span class="span-icon">></span>
+       </div>
      </div>
-     <div class="bulletin-wrapper"></div>
+     <div class="bulletin-wrapper">
+       <span class="bulletin-title"></span><span 
+             class="bulletin-text">{{seller.bulletin}}</span>
+       <span class="span-icon">></span>
+     </div>
+     <div class="background">
+       <img :src="seller.avatar" width="100%" height="100%">
+     </div>
   </div>
 </template>
 
@@ -28,6 +39,9 @@ export default {
     seller: {
       type: Object
     }
+  },
+  created() {
+    this.sellClass = ['decrease', 'discount', 'special', 'guarantee', 'invoice'];
   }
 };
 </script>
@@ -36,18 +50,20 @@ export default {
   @import "../../common/stylus/mixin";
 
   .header
+    position relative
     color: #ffffff
-    background: #000
+    background: rgba(7, 17, 27, 0.5)
     .content-wrapper
-      padding: 24px 12px 18px 24px
+      position: relative
+      padding: 24px 12px 14px 24px
       font-size: 0
       .avatar
         display: inline-block
+        vertical-align: top
         img
-          vertical-align: bottom
+          border-radius:2px
       .content
         display: inline-block
-        font-size: 14px
         margin-left: 16px
         .title
           margin: 2px 0 8px 0
@@ -64,4 +80,76 @@ export default {
             font-size: 16px
             line-height: 18px
             font-weight: bold
+        .description
+          margin-bottom: 10px
+          line-height: 12px
+          font-size: 12px
+        .support
+          .icon
+            display: inline-block
+            vertical-align: top
+            width: 12px
+            height: 12px
+            margin-right: 5px
+            background-size: 12px 12px
+            &.decrease
+              bg-image('decrease_1')
+            &.discount
+              bg-image('discount_1')
+            &.guarantee
+              bg-image('guarantee_1')
+            &.invoice
+              bg-image('invoice_1')
+            &.special
+              bg-image('special_1')
+          .text
+            line-height: 12px
+            font-size: 12px
+      .support-content
+        position: absolute
+        right: 12px
+        bottom: 18px
+        padding: 0 8px
+        line-height: 24px
+        background: rgba(0, 0, 0, 0.2);
+        font-size: 12px
+        border-radius: 15px
+        .span-icon
+          margin-left: 2px
+          font-size: 12px
+    .bulletin-wrapper
+      position: relative
+      height: 28px
+      line-height: 28px
+      padding: 0 22px 0 12px
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      background: rgba(7, 17 ,27 ,0.2)
+      .bulletin-title
+        display: inline-block
+        vertical-align: top;
+        margin-top: 8px
+        width: 22px
+        height: 12px
+        bg-image('bulletin')
+        background-size: 22px 12px
+        background-repeat: no-repeat
+      .bulletin-text
+        margin: 0 4px
+        font-size: 10px
+        vertical-align:top;
+      .span-icon
+        position: absolute
+        font-size: 10px
+        right: 12px
+        top: 0px
+    .background
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      z-index: -1
+      filter: blur(10px)
 </style>
