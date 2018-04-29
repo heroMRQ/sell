@@ -22,26 +22,50 @@
          <span class="span-icon">></span>
        </div>
      </div>
-     <div class="bulletin-wrapper">
-       <span class="bulletin-title"></span><span 
-             class="bulletin-text">{{seller.bulletin}}</span>
+     <div class="bulletin-wrapper" @click="showDetail">
+       <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
        <span class="span-icon">></span>
      </div>
      <div class="background">
        <img :src="seller.avatar" width="100%" height="100%">
      </div>
+     <div v-show="detailShow" class="detail">
+       <div class="detail-wrapper clearfix">
+         <div class="detail-main">
+           <h1 class="name">{{seller.name}}</h1>
+         </div>
+       </div>
+       <div class="detail-close">
+         <i class="icon-close">X</i>
+       </div>
+     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+import star from './../star/star';
+
 export default {
   props: {
     seller: {
       type: Object
     }
   },
+  methods: {
+    showDetail() {
+      this.detailShow = true;
+    }
+  },
+  data() {
+    return {
+      detailShow: false
+    };
+  },
   created() {
     this.sellClass = ['decrease', 'discount', 'special', 'guarantee', 'invoice'];
+  },
+  components: {
+    star
   }
 };
 </script>
@@ -152,4 +176,31 @@ export default {
       height: 100%
       z-index: -1
       filter: blur(10px)
+    .detail
+      position: fixed
+      top: 0
+      left: 0
+      z-index: 100
+      height: 100%
+      width: 100%
+      overflow: auto
+      background: rgba(7, 17, 27, 0.8)
+      .detail-wrapper
+        min-height: 100%
+        width: 100%
+        .detail-main
+          margin-top: 64px
+          padding-bottom: 64px
+          .name
+            line-height: 16px
+            text-align: center
+            font-size: 16px
+            font-weight: 700
+      .detail-close
+        position: relative
+        width: 32px
+        height: 32px
+        margin: -64px auto 0 auto
+        clear: both
+        font-size: 20px
 </style>
