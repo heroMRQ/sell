@@ -1,6 +1,6 @@
 <template>
   <div class="star" :class="starType">
-        <span class="star-item" v-for="itemClass in itemClasses" v-bind:key="" :class="itemClass"></span>
+        <span v-for="itemClass in itemClasses" :class="itemClass" class="star-item"></span>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ const CLS_HALF = 'half';
 const CLS_OFF = 'off';
 
 export default {
-  porps: {
+  props: {
     size: {
       type: Number
     },
@@ -51,7 +51,7 @@ export default {
         .star-item
             display: inline-block
             background-repeat: no-repeat
-        .star-48
+        &.star-48
             .star-item
                 width: 20px
                 height: 20px
@@ -65,7 +65,7 @@ export default {
                     bg-image('star48_half')
                 &.off
                     bg-image('star48_off')
-        .star-36
+        &.star-36
             .star-item
                 width: 15px
                 height: 15px
@@ -79,7 +79,7 @@ export default {
                     bg-image('star36_half')
                 &.off
                     bg-image('star36_off')
-        .star-24
+        &.star-24
             .star-item
                 width: 10px
                 height: 10px
