@@ -2,11 +2,11 @@
   <div class="goods">
     <div class="menu-wrapper">
       <ul>
-        <li v-for="item in goods">
+        <!-- <li v-for="item in goods">
           <span class="text">
             <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>>{{item.name}}
           </span>
-        </li>
+        </li> -->
       </ul>
     </div>
     <div class="foods-wrapper"></div>
