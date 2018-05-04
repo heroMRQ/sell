@@ -42,7 +42,7 @@
               <div class="line"></div>
             </div>
             <ul v-if="seller.supports" class="supports">
-              <li class="support-item" v-for="item in seller.supports">
+              <li class="support-item" v-for="item in seller.supports" :key="item.type">
                 <span class="icon" :class="classMap[item.type]"></span>
                 <span class="text">{{item.description}}</span>
               </li>
@@ -221,10 +221,12 @@ export default {
       height: 100%
       width: 100%
       overflow: auto
-      transition: all 0.5s
+      transition: all 1s
+      background: rgba(7, 17, 27, 0.8)
       &.fade-transition
         opacity: 1
         background: black
+        background: rgba(7, 17, 27, 0.8)
       &.fade-enter, &.fade-leave
         opacity: 0
         background: rgba(7, 17, 27, 0)
