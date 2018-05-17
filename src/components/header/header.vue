@@ -13,7 +13,8 @@
             {{seller.description}}/{{seller.deliveryTime}}分钟送达
           </div>
           <div v-if="seller.supports" class="support">
-            <span class="icon" :icon="seller.supports[0].type" :class="classMap[seller.supports[0].type]"></span>
+            <!-- <span class="icon" :icon="seller.supports[0].type" :class="classMap[seller.supports[0].type]"></span> -->
+            <icon :iconType="seller.supports[0].type"></icon>
             <span class="text">{{seller.supports[0].description}}</span>
           </div>
         </div>
@@ -44,7 +45,7 @@
             <ul v-if="seller.supports" class="supports">
               <li class="support-item" v-for="item in seller.supports" :key="item.type">
                 <!-- <span class="icon" :class="classMap[item.type]"></span> -->
-                <myicon :iconType="1"></myicon>
+                <icon :iconType="item.type"></icon>
                 <span class="text">{{item.description}}</span>
               </li>
             </ul>
@@ -66,7 +67,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import myicon from './../icon/icon';
+import icon from './../icon/icon';
 import star from './../star/star';
 
 export default {
@@ -98,7 +99,8 @@ export default {
     ];
   },
   components: {
-    star
+    star,
+    icon
   }
 };
 </script>

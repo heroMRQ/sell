@@ -2,11 +2,12 @@
   <div class="goods">
     <div class="menu-wrapper">
       <ul>
-        <!-- <li v-for="item in goods">
-          <span class="text">
-            <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>>{{item.name}}
+        <li v-for="item in goods" class="menu-item">
+          <span class="text border-1px">
+            <!-- <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>>{{item.name}} -->
+            <icon v-show="item.type>0" class="icon-style" :iconType="item.type"></icon>{{item.name}}
           </span>
-        </li> -->
+        </li>
       </ul>
     </div>
     <div class="foods-wrapper"></div>
@@ -14,7 +15,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-  const ERR_OK = 0;
+import icon from './../icon/icon';
+
+const ERR_OK = 0;
 
 export default {
   props: {
@@ -28,7 +31,7 @@ export default {
     };
   },
   created() {
-    this.classMap = ['decrease', 'discount', 'special', 'guarantee', 'invoice'];
+    // this.classMap = ['decrease', 'discount', 'special', 'guarantee', 'invoice'];
     this.$http.get('/api/goods').then(response => {
       response = response.body;
       if (response.errno === ERR_OK) {
@@ -36,11 +39,15 @@ export default {
         console.log(this.goods);
       }
     });
+  },
+  components: {
+    icon
   }
 };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  @import "../../common/stylus/mixin.styl"
   .goods
     display: flex
     position: absolute
@@ -52,6 +59,18 @@ export default {
       flex: 0 0 80px
       width: 80px
       background: #f3f5f7
+      .menu-item
+        display: table
+        height: 54px
+        width: 56px
+        padding: 0 12px
+        line-height: 14px
+        .text
+          display: table-cell
+          width: 56px
+          vertical-align: middle
+          font-size: 12px 
+          border-1px(rgba(7, 17, 27, 0.1))
     .foods-wrapper
       flex: 1
 </style>
