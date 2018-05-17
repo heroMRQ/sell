@@ -10,40 +10,65 @@
         </li>
       </ul>
     </div>
-    <div class="foods-wrapper"></div>
+    <div class="foods-wrapper">
+      <ul>
+        <li v-for="item in goods" class="food-list">
+          <h1 class="title">{{item.name}}</h1>
+          <ul>
+            <li v-for="food in item.foods" class="food-item">
+              <div class="icon">
+                <img :src="food.icon">
+              </div>
+              <div class="content">
+                <h2 class="name">{{food.name}}</h2>
+                <p class="desc">{{food.description}}</p>
+                <div class="extra">
+                  <span>月售{{food.sellCount}}</span>
+                  <span>好评率{{food.rating}}%</span>
+                </div>
+                <div class="price">
+                  <span>￥{{food.price}}</span>
+                  <span v-show="food.oldPrice">￥food.oldPrice</span>
+                </div>
+              </div>
+            </li>
+            </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import icon from './../icon/icon';
+  import icon from './../icon/icon';
 
-const ERR_OK = 0;
+  const ERR_OK = 0;
 
-export default {
-  props: {
-    seller: {
-      type: Object
-    }
-  },
-  data() {
-    return {
-      goods: []
-    };
-  },
-  created() {
-    // this.classMap = ['decrease', 'discount', 'special', 'guarantee', 'invoice'];
-    this.$http.get('/api/goods').then(response => {
-      response = response.body;
-      if (response.errno === ERR_OK) {
-        this.goods = response.data;
-        console.log(this.goods);
+  export default {
+    props: {
+      seller: {
+        type: Object
       }
-    });
-  },
-  components: {
-    icon
-  }
-};
+    },
+    data() {
+      return {
+        goods: []
+      };
+    },
+    created() {
+      // this.classMap = ['decrease', 'discount', 'special', 'guarantee', 'invoice'];
+      this.$http.get('/api/goods').then(response => {
+        response = response.body;
+        if (response.errno === ERR_OK) {
+          this.goods = response.data;
+          console.log(this.goods);
+        }
+      });
+    },
+    components: {
+      icon
+    }
+  };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
@@ -69,8 +94,16 @@ export default {
           display: table-cell
           width: 56px
           vertical-align: middle
-          font-size: 12px 
+          font-size: 12px
           border-1px(rgba(7, 17, 27, 0.1))
     .foods-wrapper
       flex: 1
+      .title
+        padding-left: 14px
+        height: 26px
+        line-height: 26px
+        border-left: 2px solid #d9dde1
+        font-size: 12px
+        color: rgba(147, 153, 159, 0.2)
+        background: #f3f5f7
 </style>
