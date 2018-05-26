@@ -35,12 +35,14 @@
         </li>
       </ul>
     </div>
+    <shopcart></shopcart>
   </div>
 </template>
 
 <script type='text/ecmascript-6'>
   import icon from './../icon/icon';
   import BScroll from 'better-scroll';
+  import shopcart from './../shopcart/shopcart';
 
   const ERR_OK = 0;
 
@@ -113,7 +115,8 @@
       }
     },
     components: {
-      icon
+      icon,
+      shopcart
     }
   };
 </script>
